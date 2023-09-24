@@ -15,6 +15,7 @@ jobs:
       - name: Set up SSH Key
         run: |
           mkdir -p ~/.ssh
+          echo "$DEPLOY_KEY"
           echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
