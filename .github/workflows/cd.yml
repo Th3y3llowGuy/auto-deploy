@@ -10,21 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up SSH Key
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.PRIVATE_KEY }}" > ~/.ssh/id_rsa_tmp
-          chmod 600 ~/.ssh/id_rsa_tmp
-          ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
-          chmod 644 ~/.ssh/known_hosts
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.PRIVATE_KEY }}
 
       - name: Deploy to VPS
         run: |
-          ssh $DEPLOY_USER@$DEPLOY_HOST
-          cd $DEPLOY_DIR
+          cd ${{ secrets.DEPLOY_DIR }}
           git pull origin main
           docker-compose up --build -d
-        env:
-          DEPLOY_USER: ${{ secrets.USERNAME }}
-          DEPLOY_HOST: ${{ secrets.HOST }}
-          DEPLOY_KEY: ${{ secrets.PRIVATE_KEY }}
-          DEPLOY_DIR: ${{ secrets.DEPLOY_DIR }}
