@@ -9,14 +9,11 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
       - name: Set up SSH Key
         run: |
           mkdir -p ~/.ssh
-          echo "$DEPLOY_KEY"
-          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa_tmp
+          echo ${{ secrets.PRIVATE_KEY }}
+          echo ${{ secrets.PRIVATE_KEY }} > ~/.ssh/id_rsa_tmp
           chmod 600 ~/.ssh/id_rsa_tmp
           ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
