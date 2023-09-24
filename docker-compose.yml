@@ -3,7 +3,8 @@ version: "3.9"
 services:
   api:
     build:
-      dockerfile: ./Dockerfile
+      context: ./
+      dockerfile: Dockerfile
     container_name: deploy_api
     ports:
       - "3000:3000"
