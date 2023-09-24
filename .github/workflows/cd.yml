@@ -16,8 +16,8 @@ jobs:
         run: |
           mkdir -p ~/.ssh
           echo "$DEPLOY_KEY"
-          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
+          echo "$DEPLOY_KEY" > ~/.ssh/id_rsa_tmp
+          chmod 600 ~/.ssh/id_rsa_tmp
           ssh-keyscan $DEPLOY_HOST >> ~/.ssh/known_hosts
           chmod 644 ~/.ssh/known_hosts
 
