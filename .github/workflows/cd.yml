@@ -26,7 +26,7 @@ jobs:
         port: 22
         script: |
           cd /home/ubuntu/Projects/auto-deploy
-          git pull origin master
+          git pull
           git status
           npm install 
           pm2 restart auto
