@@ -18,9 +18,7 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USERNAME }}
           key: ${{ secrets.PRIVATE_KEY }}
-
-      - name: Build docker
-        run: |
+          script: |
             cd ${{ secrets.DEPLOY_DIR }}
             git pull origin main
             docker-compose up --build -d
